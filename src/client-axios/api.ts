@@ -24,6 +24,19 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface ApiV1ChatMessagesMessageIdPut403Response
+ */
+export interface ApiV1ChatMessagesMessageIdPut403Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof ApiV1ChatMessagesMessageIdPut403Response
+     */
+    'error'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Booth
  */
 export interface Booth {
@@ -95,10 +108,10 @@ export interface Booth {
     'miroUrl': string;
     /**
      * 
-     * @type {Array<BoothPdfUrls>}
+     * @type {Array<BoothPdfUrlsInner>}
      * @memberof Booth
      */
-    'pdfUrls': Array<BoothPdfUrls>;
+    'pdfUrls': Array<BoothPdfUrlsInner>;
     /**
      * 
      * @type {Array<string>}
@@ -109,19 +122,19 @@ export interface Booth {
 /**
  * 
  * @export
- * @interface BoothPdfUrls
+ * @interface BoothPdfUrlsInner
  */
-export interface BoothPdfUrls {
+export interface BoothPdfUrlsInner {
     /**
      * 
      * @type {string}
-     * @memberof BoothPdfUrls
+     * @memberof BoothPdfUrlsInner
      */
     'url'?: string;
     /**
      * 
      * @type {string}
-     * @memberof BoothPdfUrls
+     * @memberof BoothPdfUrlsInner
      */
     'title'?: string;
 }
@@ -154,7 +167,7 @@ export interface ChatMessage {
      * @type {string}
      * @memberof ChatMessage
      */
-    'eventAbbr': string;
+    'eventAbbr'?: string;
     /**
      * 
      * @type {number}
@@ -193,14 +206,12 @@ export interface ChatMessage {
     'replyTo'?: number | null;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ChatMessageMessageTypeEnum {
-    Chat = 'chat',
-    Qa = 'qa'
-}
+export const ChatMessageMessageTypeEnum = {
+    Chat: 'chat',
+    Qa: 'qa'
+} as const;
+
+export type ChatMessageMessageTypeEnum = typeof ChatMessageMessageTypeEnum[keyof typeof ChatMessageMessageTypeEnum];
 
 /**
  * 
@@ -270,14 +281,12 @@ export interface ChatMessageProperties {
     'replyTo'?: number | null;
 }
 
-/**
-    * @export
-    * @enum {string}
-    */
-export enum ChatMessagePropertiesMessageTypeEnum {
-    Chat = 'chat',
-    Qa = 'qa'
-}
+export const ChatMessagePropertiesMessageTypeEnum = {
+    Chat: 'chat',
+    Qa: 'qa'
+} as const;
+
+export type ChatMessagePropertiesMessageTypeEnum = typeof ChatMessagePropertiesMessageTypeEnum[keyof typeof ChatMessagePropertiesMessageTypeEnum];
 
 /**
  * 
@@ -347,42 +356,29 @@ export interface Event {
     'coc': string;
     /**
      * 
-     * @type {Array<EventConferenceDays>}
+     * @type {Array<EventConferenceDaysInner>}
      * @memberof Event
      */
-    'conferenceDays'?: Array<EventConferenceDays>;
+    'conferenceDays'?: Array<EventConferenceDaysInner>;
 }
 /**
  * 
  * @export
- * @interface EventConferenceDays
+ * @interface EventConferenceDaysInner
  */
-export interface EventConferenceDays {
+export interface EventConferenceDaysInner {
     /**
      * 
      * @type {number}
-     * @memberof EventConferenceDays
+     * @memberof EventConferenceDaysInner
      */
     'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof EventConferenceDays
+     * @memberof EventConferenceDaysInner
      */
     'date'?: string;
-}
-/**
- * 
- * @export
- * @interface InlineResponse403
- */
-export interface InlineResponse403 {
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse403
-     */
-    'error'?: string;
 }
 /**
  * 
@@ -521,10 +517,10 @@ export interface Talk {
     'abstract': string;
     /**
      * array of speakers name
-     * @type {Array<TalkSpeakers>}
+     * @type {Array<TalkSpeakersInner>}
      * @memberof Talk
      */
-    'speakers': Array<TalkSpeakers>;
+    'speakers': Array<TalkSpeakersInner>;
     /**
      * 
      * @type {number}
@@ -595,19 +591,19 @@ export interface Talk {
 /**
  * 
  * @export
- * @interface TalkSpeakers
+ * @interface TalkSpeakersInner
  */
-export interface TalkSpeakers {
+export interface TalkSpeakersInner {
     /**
      * 
      * @type {number}
-     * @memberof TalkSpeakers
+     * @memberof TalkSpeakersInner
      */
     'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof TalkSpeakers
+     * @memberof TalkSpeakersInner
      */
     'name'?: string;
 }
@@ -671,7 +667,7 @@ export interface UpdateChatMessage {
      * @type {string}
      * @memberof UpdateChatMessage
      */
-    'eventAbbr': string;
+    'eventAbbr'?: string;
     /**
      * 
      * @type {number}
@@ -710,14 +706,59 @@ export interface UpdateChatMessage {
     'replyTo'?: number | null;
 }
 
+export const UpdateChatMessageMessageTypeEnum = {
+    Chat: 'chat',
+    Qa: 'qa'
+} as const;
+
+export type UpdateChatMessageMessageTypeEnum = typeof UpdateChatMessageMessageTypeEnum[keyof typeof UpdateChatMessageMessageTypeEnum];
+
 /**
-    * @export
-    * @enum {string}
-    */
-export enum UpdateChatMessageMessageTypeEnum {
-    Chat = 'chat',
-    Qa = 'qa'
+ * 
+ * @export
+ * @interface VideoRegistration
+ */
+export interface VideoRegistration {
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoRegistration
+     */
+    'url'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoRegistration
+     */
+    'status': VideoRegistrationStatusEnum;
+    /**
+     * 
+     * @type {object}
+     * @memberof VideoRegistration
+     */
+    'statistics'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoRegistration
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VideoRegistration
+     */
+    'updatedAt'?: string;
 }
+
+export const VideoRegistrationStatusEnum = {
+    Unsubmitted: 'unsubmitted',
+    Submitted: 'submitted',
+    Confirmed: 'confirmed',
+    InvalidFormat: 'invalid_format'
+} as const;
+
+export type VideoRegistrationStatusEnum = typeof VideoRegistrationStatusEnum[keyof typeof VideoRegistrationStatusEnum];
 
 /**
  * 
@@ -868,7 +909,7 @@ export const ChatMessageApiAxiosParamCreator = function (configuration?: Configu
          * @throws {RequiredError}
          */
         apiV1ChatMessagesGet: async (eventAbbr: string, roomId: string, roomType: string, createdFrom?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter '[eventAbbr]' is not null or undefined
+            // verify required parameter 'eventAbbr' is not null or undefined
             assertParamExists('apiV1ChatMessagesGet', 'eventAbbr', eventAbbr)
             // verify required parameter 'roomId' is not null or undefined
             assertParamExists('apiV1ChatMessagesGet', 'roomId', roomId)
@@ -1140,7 +1181,7 @@ export const EventApiAxiosParamCreator = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         apiV1EventsEventAbbrGet: async (eventAbbr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter '[eventAbbr]' is not null or undefined
+            // verify required parameter 'eventAbbr' is not null or undefined
             assertParamExists('apiV1EventsEventAbbrGet', 'eventAbbr', eventAbbr)
             const localVarPath = `/api/v1/events/{eventAbbr}`
                 .replace(`{${"eventAbbr"}}`, encodeURIComponent(String(eventAbbr)));
@@ -1241,7 +1282,7 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1EventAbbrMyProfileGet: async (eventAbbr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter '[eventAbbr]' is not null or undefined
+            // verify required parameter 'eventAbbr' is not null or undefined
             assertParamExists('apiV1EventAbbrMyProfileGet', 'eventAbbr', eventAbbr)
             const localVarPath = `/api/v1/${eventAbbr}/my_profile`
                 .replace(`{${"eventAbbr"}}`, encodeURIComponent(String(eventAbbr)));
@@ -1342,7 +1383,7 @@ export const SponsorApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         apiV1SponsorsGet: async (eventAbbr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter '[eventAbbr]' is not null or undefined
+            // verify required parameter 'eventAbbr' is not null or undefined
             assertParamExists('apiV1SponsorsGet', 'eventAbbr', eventAbbr)
             const localVarPath = `/api/v1/sponsors`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1448,7 +1489,7 @@ export const TalkApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          */
         apiV1TalksGet: async (eventAbbr: string, trackId?: string, conferenceDayIds?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter '[eventAbbr]' is not null or undefined
+            // verify required parameter 'eventAbbr' is not null or undefined
             assertParamExists('apiV1TalksGet', 'eventAbbr', eventAbbr)
             const localVarPath = `/api/v1/talks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1629,7 +1670,7 @@ export const TrackApiAxiosParamCreator = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         apiV1TracksGet: async (eventAbbr: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter '[eventAbbr]' is not null or undefined
+            // verify required parameter 'eventAbbr' is not null or undefined
             assertParamExists('apiV1TracksGet', 'eventAbbr', eventAbbr)
             const localVarPath = `/api/v1/tracks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1842,6 +1883,181 @@ export class TrackApi extends BaseAPI {
      */
     public apiV1TracksTrackIdViewerCountGet(trackId: string, options?: AxiosRequestConfig) {
         return TrackApiFp(this.configuration).apiV1TracksTrackIdViewerCountGet(trackId, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * VideoRegistrationApi - axios parameter creator
+ * @export
+ */
+export const VideoRegistrationApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} talkId ID of talk
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1TalksTalkIdVideoRegistrationGet: async (talkId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'talkId' is not null or undefined
+            assertParamExists('apiV1TalksTalkIdVideoRegistrationGet', 'talkId', talkId)
+            const localVarPath = `/api/v1/talks/{talkId}/video_registration`
+                .replace(`{${"talkId"}}`, encodeURIComponent(String(talkId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Put VideoRegistration
+         * @param {string} talkId ID of talk
+         * @param {VideoRegistration} [videoRegistration] Update video_registration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1TalksTalkIdVideoRegistrationPut: async (talkId: string, videoRegistration?: VideoRegistration, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'talkId' is not null or undefined
+            assertParamExists('apiV1TalksTalkIdVideoRegistrationPut', 'talkId', talkId)
+            const localVarPath = `/api/v1/talks/{talkId}/video_registration`
+                .replace(`{${"talkId"}}`, encodeURIComponent(String(talkId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(videoRegistration, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * VideoRegistrationApi - functional programming interface
+ * @export
+ */
+export const VideoRegistrationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = VideoRegistrationApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} talkId ID of talk
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1TalksTalkIdVideoRegistrationGet(talkId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VideoRegistration>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1TalksTalkIdVideoRegistrationGet(talkId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Put VideoRegistration
+         * @param {string} talkId ID of talk
+         * @param {VideoRegistration} [videoRegistration] Update video_registration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiV1TalksTalkIdVideoRegistrationPut(talkId: string, videoRegistration?: VideoRegistration, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1TalksTalkIdVideoRegistrationPut(talkId, videoRegistration, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * VideoRegistrationApi - factory interface
+ * @export
+ */
+export const VideoRegistrationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = VideoRegistrationApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} talkId ID of talk
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1TalksTalkIdVideoRegistrationGet(talkId: string, options?: any): AxiosPromise<VideoRegistration> {
+            return localVarFp.apiV1TalksTalkIdVideoRegistrationGet(talkId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Put VideoRegistration
+         * @param {string} talkId ID of talk
+         * @param {VideoRegistration} [videoRegistration] Update video_registration
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiV1TalksTalkIdVideoRegistrationPut(talkId: string, videoRegistration?: VideoRegistration, options?: any): AxiosPromise<void> {
+            return localVarFp.apiV1TalksTalkIdVideoRegistrationPut(talkId, videoRegistration, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * VideoRegistrationApi - object-oriented interface
+ * @export
+ * @class VideoRegistrationApi
+ * @extends {BaseAPI}
+ */
+export class VideoRegistrationApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} talkId ID of talk
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoRegistrationApi
+     */
+    public apiV1TalksTalkIdVideoRegistrationGet(talkId: string, options?: AxiosRequestConfig) {
+        return VideoRegistrationApiFp(this.configuration).apiV1TalksTalkIdVideoRegistrationGet(talkId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Put VideoRegistration
+     * @param {string} talkId ID of talk
+     * @param {VideoRegistration} [videoRegistration] Update video_registration
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoRegistrationApi
+     */
+    public apiV1TalksTalkIdVideoRegistrationPut(talkId: string, videoRegistration?: VideoRegistration, options?: AxiosRequestConfig) {
+        return VideoRegistrationApiFp(this.configuration).apiV1TalksTalkIdVideoRegistrationPut(talkId, videoRegistration, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
